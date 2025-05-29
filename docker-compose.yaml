@@ -13,6 +13,21 @@ services:
       - 3306:3306
     volumes:
       - .docker/mysql:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  migrate:
+    image: migrate/migrate:v4.18.3
+    container_name: migrate
+    volumes:
+      - ./sql/migrations:/migrations
+    command: ["-path", "/migrations", "-database",  "mysql://root:root@tcp(mysql:3306)/orders", "up"]
+    depends_on:
+      mysql:
+        condition: service_healthy
 
   rabbitmq:
     image: rabbitmq:3-management

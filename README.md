@@ -48,23 +48,7 @@ go mod tidy
 sudo docker compose up -d
 ```
 
-### 5. Run Database Migrations
-You could use the [migrate](https://github.com/golang-migrate/migrate) tool:
-```bash
-migrate -path=sql/migrations -database "mysql://root:root@tcp(127.0.0.1:3306)/orders" -verbose up
-```
-or run the sql directly on the database (`sql/migrations/000001_init.up.sql`):
-```sql
-CREATE TABLE IF NOT EXISTS orders (
-  id varchar(255) NOT NULL, 
-  price float NOT NULL, 
-  tax float NOT NULL, 
-  final_price float NOT NULL, 
-  PRIMARY KEY (id)
-);
-```
-
-### 6. Run the Application
+### 5. Run the Application
 ```bash
 cd cmd/ordersystem && go run main.go wire_gen.go
 ```
