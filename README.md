@@ -43,14 +43,9 @@ cd gocourse-challenge-03
 go mod tidy
 ```
 
-### 4. Start the Database and Services with Docker
+### 4. Start the Services and App with Docker
 ```bash
 sudo docker compose up -d
-```
-
-### 5. Run the Application
-```bash
-cd cmd/ordersystem && go run main.go wire_gen.go
 ```
 
 ## API Endpoints and Ports
